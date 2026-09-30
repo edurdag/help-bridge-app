@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- Background Modes -->
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>bluetooth-central</string>
+        <string>fetch</string>
+        <string>remote-notification</string>
+        <string>processing</string>
+        <string>voip</string>
+    </array>
+
+    <!-- BGTaskScheduler -->
+    <key>BGTaskSchedulerPermittedIdentifiers</key>
+    <array>
+        <string>com.help.telecare.telemetry-flush</string>
+        <string>com.help.telecare.health-check</string>
+        <string>com.help.telecare.heartbeat</string>
+    </array>
+
+    <!-- Privacy — Turkish (KVKK) -->
+    <key>NSBluetoothAlwaysUsageDescription</key>
+    <string>HELP sağlık cihazınızla sürekli bağlantı kurmak ve sağlık verilerinizi izlemek için Bluetooth gereklidir.</string>
+    <key>NSBluetoothPeripheralUsageDescription</key>
+    <string>HELP cihazından sağlık verilerini almak için Bluetooth kullanılır.</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Doktorunuzla acil görüntülü arama yapabilmek için kamera erişimi gereklidir.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Doktorunuzla sesli ve görüntülü arama yapabilmek için mikrofon erişimi gereklidir.</string>
+    <key>NSLocalNetworkUsageDescription</key>
+    <string>HELP cihazının WiFi kurulum portalına bağlanmak için yerel ağ erişimi gereklidir.</string>
+
+    <!-- Network Security -->
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsLocalNetworking</key>
+        <true/>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+    </dict>
+
+    <!-- Status Bar -->
+    <key>UIStatusBarStyle</key>
+    <string>UIStatusBarStyleLightContent</string>
+    <key>UIViewControllerBasedStatusBarAppearance</key>
+    <true/>
+
+    <!-- Orientations -->
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+    </array>
+</dict>
+</plist>

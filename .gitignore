@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Platform-specific generated files
+android/app/build/
+android/.gradle/
+android/app/src/main/assets/public/
+ios/App/App/public/
+ios/App/Pods/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local

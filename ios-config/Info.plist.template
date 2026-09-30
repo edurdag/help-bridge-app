@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  HELP Telecare Bridge — iOS Info.plist Template
+  
+  This file serves as a reference template for the iOS app configuration.
+  When `npx cap add ios` is run on a Mac, merge these entries into the
+  generated ios/App/App/Info.plist file.
+  
+  Key entries:
+  - UIBackgroundModes: bluetooth-central, fetch, remote-notification, processing, voip
+  - BLE privacy strings in Turkish
+  - Camera/Microphone privacy strings for video calls
+  - BGTaskScheduler permitted identifiers
+-->
+<plist version="1.0">
+<dict>
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- App Identity                                    -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <key>CFBundleName</key>
+    <string>HELP Sağlık</string>
+    <key>CFBundleDisplayName</key>
+    <string>HELP Sağlık İzleme</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.help.telecare.bridge</string>
+    <key>CFBundleVersion</key>
+    <string>1</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0.0</string>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- Background Modes (CRITICAL for 24/7 monitoring) -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <key>UIBackgroundModes</key>
+    <array>
+        <!-- BLE: Auto-relaunch on peripheral events (ESP32 broadcast) -->
+        <string>bluetooth-central</string>
+        <!-- Background fetch: BGAppRefreshTask for telemetry flush -->
+        <string>fetch</string>
+        <!-- Silent push: APNs content-available:1 to wake app -->
+        <string>remote-notification</string>
+        <!-- BGProcessingTask: extended background execution -->
+        <string>processing</string>
+        <!-- VoIP: PushKit for incoming call wakeup (CallKit required) -->
+        <string>voip</string>
+    </array>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- BGTaskScheduler Permitted Identifiers           -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <key>BGTaskSchedulerPermittedIdentifiers</key>
+    <array>
+        <!-- Periodic telemetry buffer flush -->
+        <string>com.help.telecare.telemetry-flush</string>
+        <!-- Health check: verify BLE connection, reconnect if needed -->
+        <string>com.help.telecare.health-check</string>
+        <!-- Heartbeat: send presence ping to server -->
+        <string>com.help.telecare.heartbeat</string>
+    </array>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- Privacy Usage Descriptions (Turkish - KVKK)     -->
+    <!-- ═══════════════════════════════════════════════ -->
+
+    <!-- Bluetooth -->
+    <key>NSBluetoothAlwaysUsageDescription</key>
+    <string>HELP sağlık cihazınızla sürekli bağlantı kurmak ve sağlık verilerinizi izlemek için Bluetooth gereklidir. Bu izin olmadan cihazınız veri gönderemez.</string>
+    <key>NSBluetoothPeripheralUsageDescription</key>
+    <string>HELP cihazından sağlık verilerini almak için Bluetooth kullanılır.</string>
+
+    <!-- Camera (video calls) -->
+    <key>NSCameraUsageDescription</key>
+    <string>Doktorunuzla acil görüntülü arama yapabilmek için kamera erişimi gereklidir. Kamera yalnızca doktor araması sırasında etkinleştirilir.</string>
+
+    <!-- Microphone (voice/video calls) -->
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Doktorunuzla sesli ve görüntülü arama yapabilmek için mikrofon erişimi gereklidir.</string>
+
+    <!-- Location (required by iOS for BLE background scanning) -->
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>HELP cihazını bulmak için konum izni gereklidir. Konum bilginiz kaydedilmez veya paylaşılmaz.</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>Arka planda HELP cihazıyla bağlantıyı sürdürmek için sürekli konum izni gereklidir. Konum bilginiz kaydedilmez.</string>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- Network & Transport Security                    -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <!-- Allow local network access for ESP32 WiFi AP captive portal -->
+        <key>NSAllowsLocalNetworking</key>
+        <true/>
+        <!-- Allow arbitrary loads for development (disable for production) -->
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+    </dict>
+
+    <!-- Local network usage (Bonjour for ESP32 discovery) -->
+    <key>NSLocalNetworkUsageDescription</key>
+    <string>HELP cihazının WiFi kurulum portalına bağlanmak için yerel ağ erişimi gereklidir.</string>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- WKWebView Configuration                         -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <key>WKAppBoundDomains</key>
+    <array>
+        <string>telecare.help</string>
+    </array>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- Status Bar & UI                                 -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <key>UIStatusBarStyle</key>
+    <string>UIStatusBarStyleLightContent</string>
+    <key>UIViewControllerBasedStatusBarAppearance</key>
+    <true/>
+
+    <!-- Supported orientations (portrait only for medical monitoring) -->
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+    </array>
+    <key>UISupportedInterfaceOrientations~ipad</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+</dict>
+</plist>

@@ -1,0 +1,8 @@
+# xtool build artifacts
+.build/
+*.ipa
+*.app
+
+# Web assets (copied by build-ios.sh)
+Sources/HELPBridge/Resources/*
+!Sources/HELPBridge/Resources/README.md
